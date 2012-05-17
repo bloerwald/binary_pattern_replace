@@ -76,6 +76,15 @@ boost::optional<std::streampos> find_pattern ( std::fstream& file
 
 int main (int argc, char**argv)
 {
+  if (argc != 4)
+  {
+    std::cerr << "Usage: <filename> <pattern> <replacement>\n"
+                 "  Where pattern is hex bytes or ??.\n"
+                 "  Example: <filename> \"66 ?? 6f\" \"62 ?? 6f\".\n"
+                 "    (replaces f?o with b?o)\n";
+    exit (-1);
+  }
+
   const maybe_char_vector_type pattern (parse_data (argv[2]));
   const maybe_char_vector_type replacement (parse_data (argv[3]));
 

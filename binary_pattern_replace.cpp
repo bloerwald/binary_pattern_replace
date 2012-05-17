@@ -111,6 +111,11 @@ int main (int argc, char**argv)
                         }
                    );
   }
+  else
+  {
+    std::cerr << "Error: Pattern not found.\n";
+    exit (-2);
+  }
 
   return 0;
 }

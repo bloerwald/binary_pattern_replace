@@ -41,9 +41,8 @@ maybe_char_vector_type parse_data (const std::string& input)
   return data;
 }
 
-boost::optional<std::streampos> find_pattern ( std::fstream& file
-                                             , const maybe_char_vector_type& pattern
-                                             )
+boost::optional<std::streampos> find_pattern
+  (std::fstream& file, const maybe_char_vector_type& pattern)
 {
   typedef std::vector<unsigned char> buffer_type;
   buffer_type buffer (std::max (pattern.size() * 3UL, 1024UL));
@@ -57,7 +56,9 @@ boost::optional<std::streampos> find_pattern ( std::fstream& file
     actual_end = buffer.begin() + file.gcount();
     matched = std::search ( buffer.begin(), actual_end
                           , pattern.begin(), pattern.end()
-                          , [] (const unsigned char& d, const maybe_char_type& p)
+                          , [] ( const unsigned char& d
+                               , const maybe_char_type& p
+                               )
                                {
                                  return !p || d == *p;
                                }
@@ -90,11 +91,14 @@ int main (int argc, char**argv)
 
   std::fstream file (argv[1], std::ios::in | std::ios::out | std::ios::binary);
 
-  const boost::optional<std::streampos> match_pos (find_pattern (file, pattern));
+  const boost::optional<std::streampos> match_pos
+    (find_pattern (file, pattern));
 
   if (match_pos)
   {
-    std::cerr << "Info: Replacing pattern, found at " << std::hex << match_pos << "\n";
+    std::cerr << "Info: Replacing pattern, found at "
+              << std::hex << match_pos
+              << "\n";
     std::vector<char> original_data (replacement.size());
     std::vector<char>::iterator original_data_itr (original_data.begin());
 

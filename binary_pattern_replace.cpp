@@ -91,6 +91,12 @@ int main (int argc, char**argv)
 
   std::fstream file (argv[1], std::ios::in | std::ios::out | std::ios::binary);
 
+  if (!file.is_open())
+  {
+    std::cerr << "Error: Could not open file.\n";
+    exit (-3);
+  }
+
   const boost::optional<std::streampos> match_pos
     (find_pattern (file, pattern));
 

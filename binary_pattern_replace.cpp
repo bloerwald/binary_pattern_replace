@@ -64,15 +64,16 @@ boost::optional<std::streampos> find_pattern
                                }
                           );
     pos += std::distance (buffer.begin(), matched);
-    if (matched == actual_end)
-    {
-      file.seekg (-pattern.size(), std::ios_base::cur);
-      pos -= pattern.size();
-    }
-  }
-  while (file.good() && matched == actual_end);
 
-  return boost::make_optional (matched != actual_end, pos);
+    if (matched != actual_end || (file.peek(), !file.good()))
+    {
+      return boost::make_optional (matched != actual_end, pos);
+    }
+
+    file.seekg (-pattern.size(), std::ios_base::cur);
+    pos -= pattern.size();
+  }
+  while (true);
 }
 
 int main (int argc, char**argv)

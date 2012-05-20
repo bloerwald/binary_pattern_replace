@@ -104,7 +104,7 @@ int main (int argc, char**argv)
   if (match_pos)
   {
     std::cerr << "Info: Replacing pattern, found at "
-              << std::hex << match_pos
+              << std::hex << *match_pos
               << "\n";
     std::vector<char> original_data (replacement.size());
     std::vector<char>::iterator original_data_itr (original_data.begin());

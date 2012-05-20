@@ -46,7 +46,7 @@ boost::optional<std::streampos> find_pattern ( std::fstream& file
                                              )
 {
   typedef std::vector<unsigned char> buffer_type;
-  buffer_type buffer (std::max (pattern.size() * 3, 1024UL));
+  buffer_type buffer (std::max (pattern.size() * 3UL, 1024UL));
   buffer_type::iterator matched (buffer.begin());
   buffer_type::iterator actual_end (buffer.begin());
 

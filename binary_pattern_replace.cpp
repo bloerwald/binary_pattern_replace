@@ -70,7 +70,7 @@ boost::optional<std::streampos> find_pattern
       return boost::make_optional (matched != actual_end, pos);
     }
 
-    file.seekg (-pattern.size(), std::ios_base::cur);
+    file.seekg (pos - std::streampos (pattern.size()), std::ios_base::beg);
     pos -= pattern.size();
   }
   while (true);

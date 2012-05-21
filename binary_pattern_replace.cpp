@@ -52,7 +52,7 @@ boost::optional<std::streampos> find_pattern
   std::streampos pos (0);
   do
   {
-    file.readsome (reinterpret_cast<char*> (&*buffer.begin()), buffer.size());
+    file.read (reinterpret_cast<char*> (&*buffer.begin()), buffer.size());
     actual_end = buffer.begin() + file.gcount();
     matched = std::search ( buffer.begin(), actual_end
                           , pattern.begin(), pattern.end()
